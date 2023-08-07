@@ -25,9 +25,9 @@ public class World {
 		for(int xx =0 ;xx< WIDTH; xx++) {
 			for(int yy =0; yy < HEIGHT; yy++) {
 				if(yy == (HEIGHT) - 1) {
-					tiles[xx+yy*WIDTH] = new WallTile(xx*16, yy*16, Tile.TILE_WALL);
+					tiles[xx+yy*WIDTH] = new WallTile(xx*16, yy*16, Tile.TILE_GRAMA);
 				}else {
-					tiles[xx+yy*WIDTH] = new FloorTile(xx*16, yy*16, Tile.TILE_FLOOR);
+					tiles[xx+yy*WIDTH] = new FloorTile(xx*16, yy*16, Tile.TILE_AR);
 				}
 			}
 		}

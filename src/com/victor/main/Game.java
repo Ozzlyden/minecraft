@@ -48,6 +48,8 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 	public static Spritesheet spritesheet;
 	public static Player player;
 	
+	public static Inventory inventory;
+	
 	public UI ui;			
 	
 	public Game() {
@@ -75,6 +77,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		player = new Player(WIDTH / 2 - 70, HEIGHT / 2, 16, 16, 1.4, Entity.PLAYER_SPRITE_RIGHT[0]);
 		world = new World();
 		ui = new UI();
+		inventory = new Inventory();
 		
 		entities.add(player);
 	}
@@ -131,6 +134,8 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 			Entity e = entities.get(i);
 			e.tick();
 		}
+		
+		inventory.tick();
 	}
 	
 	
@@ -164,6 +169,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		//g.drawImage(image, 0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height, null); 
 		
 		ui.render(g);
+		inventory.render(g);
 		bs.show();	
 	}
 
