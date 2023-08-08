@@ -14,6 +14,9 @@ public class Tile {
 	private BufferedImage sprite;
 	private int x,y;
 	
+	public boolean solid = false;	// veriuficado para ver so tile sera solido ou nao
+	
+	
 	public Tile(int x,int y,BufferedImage sprite){
 		this.x = x;
 		this.y = y;

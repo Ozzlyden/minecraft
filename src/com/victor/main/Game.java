@@ -245,7 +245,15 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		inventory.isPressed = true;
+		
+		if(e.getButton() == MouseEvent.BUTTON1) {			// Botao direito do mouse
+
+			inventory.isPressed = true;
+
+		}else if (e.getButton() == MouseEvent.BUTTON3) { 	// Botao esquedo do mouse
+			inventory.isPlaceItem = true;
+
+		}
 		inventory.mx = e.getX();
 		inventory.my = e.getY();
 	}
