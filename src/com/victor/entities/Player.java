@@ -16,7 +16,7 @@ public class Player extends Entity {
 	
 	public boolean isJumping = false;
 	public boolean jump = false;
-	public int jumpHeight = 30, jumpFrames = 0;
+	public int jumpHeight = 40, jumpFrames = 0;
 	
 	private int framesAnimation = 0;
 	private int maxFrames = 15;
@@ -37,10 +37,10 @@ public class Player extends Entity {
 		PLAYER_RIGHT = new BufferedImage[2];
 		PLAYER_LEFT = new BufferedImage[2];
 		
-		PLAYER_RIGHT[0] = Game.spritesheet.getSprite(48, 0, 16, 16);
-		PLAYER_RIGHT[1] = Game.spritesheet.getSprite(64, 0, 16, 16);
-		PLAYER_LEFT[0] = Game.spritesheet.getSprite(48, 16, 16, 16);
-		PLAYER_LEFT[1] = Game.spritesheet.getSprite(64, 16, 16, 16);
+		PLAYER_RIGHT[0] = Game.spritesheet.getSprite(48, 32, 16, 16);
+		PLAYER_RIGHT[1] = Game.spritesheet.getSprite(64, 32, 16, 16);
+		PLAYER_LEFT[0] = Game.spritesheet.getSprite(48, 48, 16, 16);
+		PLAYER_LEFT[1] = Game.spritesheet.getSprite(64, 48, 16, 16);
 
 	}
 	
@@ -48,21 +48,17 @@ public class Player extends Entity {
 		// CAMADA DE RENDER
 		depth = 2;
 		moved = false;
-		
 		vspd += gravity;		
 		
 		//LOGICA GRAVIDADE AVANCADA
 		if(!World.isFree((int)x, (int) (y + 1)) && jump) {
 			vspd = -6;
-			jump = false;
 		}
-		
 		
 		//LOGICA GRAVIDADE SIMPLES
 		if(World.isFree((int) x, (int) (y + gravity)) && isJumping == false) {
 			y += gravity;
-			
-
+			jump = false;
 		}
 		
 		
@@ -102,6 +98,7 @@ public class Player extends Entity {
 			}
 		}
 		
+		// LOGICA ANIMACAO
 		if(moved == true) {
 			framesAnimation++;
 			if(framesAnimation == maxFrames) {
@@ -110,11 +107,9 @@ public class Player extends Entity {
 				if(curSprite == maxSprite) {
 					curSprite = 0;
 				}
-			}
-			
+			}	
 		}
 		
-
 		
 		//SISTEMA DE CAMERA
 		Camera.x = Camera.clamp((int)x - Game.WIDTH / 2, 0, World.WIDTH * 16 - Game.WIDTH);

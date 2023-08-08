@@ -52,6 +52,10 @@ public class Inventory {
 					World.tiles[tilex + tiley * World.WIDTH] = new WallTile(tilex*16, tiley*16, Tile.TILE_TERRA);
 				}else if(itens[selected] == "ar") {
 					World.tiles[tilex + tiley * World.WIDTH] = new FloorTile(tilex*16, tiley*16, Tile.TILE_AR);
+				}else if(itens[selected] == "neve") {
+					World.tiles[tilex + tiley * World.WIDTH] = new WallTile(tilex*16, tiley*16, Tile.TILE_NEVE);
+				}else if(itens[selected] == "areia") {
+					World.tiles[tilex + tiley * World.WIDTH] = new WallTile(tilex*16, tiley*16, Tile.TILE_AREIA);
 				}
 				
 				// Verficacao para nao colocar em cima do player
@@ -63,6 +67,8 @@ public class Inventory {
 	}
 	
 	public void render(Graphics g) {
+		
+		// SELECIONAR ITENS RENDER
 		for(int i = 0; i < itens.length; i++) {
 			g.setColor(Color.gray);
 			g.fillRect(inicialPosition + (i * inventoryBoxSize) + 1, Game.HEIGHT * Game.SCALE - inventoryBoxSize - 1, inventoryBoxSize, inventoryBoxSize);
@@ -75,8 +81,14 @@ public class Inventory {
 				g.drawImage(Tile.TILE_TERRA,inicialPosition + (i * inventoryBoxSize) + 7, Game.HEIGHT * Game.SCALE - inventoryBoxSize + 7, 32, 32, null);
 			}else if (itens[i] == "ar"){
 				g.drawImage(Tile.TILE_AR,inicialPosition + (i * inventoryBoxSize) + 7, Game.HEIGHT * Game.SCALE - inventoryBoxSize + 7, 32, 32, null);
+			}else if (itens[i] == "neve"){
+				g.drawImage(Tile.TILE_NEVE,inicialPosition + (i * inventoryBoxSize) + 7, Game.HEIGHT * Game.SCALE - inventoryBoxSize + 7, 32, 32, null);
+			}else if (itens[i] == "areia"){
+				g.drawImage(Tile.TILE_AREIA,inicialPosition + (i * inventoryBoxSize) + 7, Game.HEIGHT * Game.SCALE - inventoryBoxSize + 7, 32, 32, null);
 			}
 			
+			
+			// SELECIONAR ITENS RENDER
 			if(selected == i) {
 				g.setColor(Color.red);
 				g.drawRect(inicialPosition + (i * inventoryBoxSize), Game.HEIGHT * Game.SCALE - inventoryBoxSize - 1, inventoryBoxSize, inventoryBoxSize);

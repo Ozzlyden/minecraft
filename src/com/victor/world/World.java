@@ -18,17 +18,35 @@ public class World {
 	
 	
 	public World(){
-		WIDTH = Game.WIDTH/16;
-		HEIGHT = Game.HEIGHT/16;
-		tiles = new Tile[WIDTH * HEIGHT];
 		
+		// DIMENSOES MUNDO
+		WIDTH = 1000;	
+		HEIGHT = 80;
+		tiles = new Tile[WIDTH * HEIGHT];
+		int inicialHeight = Entity.rand.nextInt(12 - 8) + 8;
+		
+		// LOGICA TILE
 		for(int xx =0 ;xx< WIDTH; xx++) {
 			for(int yy =0; yy < HEIGHT; yy++) {
 				if(yy == (HEIGHT) - 1 || xx == (WIDTH) - 1 || xx == 0 || yy == 0) {
-					tiles[xx+yy*WIDTH] = new WallTile(xx*16, yy*16, Tile.TILE_GRAMA);
+					tiles[xx+yy*WIDTH] = new WallTile(xx*16, yy*16, Tile.TILE_SOLID);
 					tiles[xx+yy*WIDTH].solid = true;
 				}else {
-					tiles[xx+yy*WIDTH] = new FloorTile(xx*16, yy*16, Tile.TILE_AR);
+					
+					// SISTEMA DE BIOMAS
+					if(yy >= inicialHeight) {
+						if(xx < 100) {
+							tiles[xx+yy*WIDTH] = new WallTile(xx*16, yy*16, Tile.TILE_GRAMA);
+						}else if(xx < 130) {
+							tiles[xx+yy*WIDTH] = new WallTile(xx*16, yy*16, Tile.TILE_TERRA);
+						}else if(xx < 170) {
+							tiles[xx+yy*WIDTH] = new WallTile(xx*16, yy*16, Tile.TILE_AREIA);
+						}else {
+							tiles[xx+yy*WIDTH] = new WallTile(xx*16, yy*16, Tile.TILE_NEVE);
+						}
+					}else {
+						tiles[xx+yy*WIDTH] = new FloorTile(xx*16, yy*16, Tile.TILE_AR);
+					}
 				}
 			}
 		}
