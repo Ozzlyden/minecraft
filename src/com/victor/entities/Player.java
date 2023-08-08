@@ -12,6 +12,8 @@ public class Player extends Entity {
 	
 	public boolean right, left, moved;
 	
+	public double life = 100;
+	
 	public boolean isJumping = false;
 	public boolean jump = false;
 	public int jumpHeight = 30, jumpFrames = 0;
@@ -47,8 +49,7 @@ public class Player extends Entity {
 		depth = 2;
 		moved = false;
 		
-		vspd += gravity;
-		
+		vspd += gravity;		
 		
 		//LOGICA GRAVIDADE AVANCADA
 		if(!World.isFree((int)x, (int) (y + 1)) && jump) {

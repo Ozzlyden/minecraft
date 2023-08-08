@@ -74,7 +74,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		enemies1 = new ArrayList<Enemy1>();
 		
 		//INICIALIZANDO OBJETOS
-		player = new Player(WIDTH / 2 - 70, HEIGHT / 2, 16, 16, 1.4, Entity.PLAYER_SPRITE_RIGHT[0]);
+		player = new Player(WIDTH / 2 - 70, HEIGHT / 2, 16, 16, 1, Entity.PLAYER_SPRITE_RIGHT[0]);
 		world = new World();
 		ui = new UI();
 		inventory = new Inventory();
@@ -135,6 +135,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 			e.tick();
 		}
 		
+		ui.tick();
 		inventory.tick();
 	}
 	
