@@ -54,7 +54,7 @@ public class Enemy1 extends Entity{
 				Tile tile = World.tiles[xnext + ynext*World.WIDTH];
 				
 				if(World.tiles[xnext + ynext*World.WIDTH] instanceof WallTile && World.tiles[xnext + ynext*World.WIDTH].solid == false) {
-					World.tiles[xnext + ynext*World.WIDTH] = new FloorTile((xnext +1) * 16,ynext  * 16, Tile.TILE_AR);
+					World.tiles[xnext + ynext*World.WIDTH] = new FloorTile((xnext +1) * 16,ynext  * 16, Tile.TILE_DIA);
 				}
 				
 				dir = -1;
@@ -71,7 +71,7 @@ public class Enemy1 extends Entity{
 				Tile tile = World.tiles[xnext + ynext*World.WIDTH];
 				
 				if(World.tiles[xnext + ynext*World.WIDTH] instanceof WallTile && World.tiles[xnext + ynext*World.WIDTH].solid == false) {
-					World.tiles[xnext + ynext*World.WIDTH] = new FloorTile((xnext +1) * 16,ynext  * 16, Tile.TILE_AR);
+					World.tiles[xnext + ynext*World.WIDTH] = new FloorTile((xnext +1) * 16,ynext  * 16, Tile.TILE_DIA);
 				}
 				
 				dir = 1;

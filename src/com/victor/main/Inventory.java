@@ -51,7 +51,7 @@ public class Inventory {
 				}else if(itens[selected] == "terra") {
 					World.tiles[tilex + tiley * World.WIDTH] = new WallTile(tilex*16, tiley*16, Tile.TILE_TERRA);
 				}else if(itens[selected] == "ar") {
-					World.tiles[tilex + tiley * World.WIDTH] = new FloorTile(tilex*16, tiley*16, Tile.TILE_AR);
+					World.tiles[tilex + tiley * World.WIDTH] = new FloorTile(tilex*16, tiley*16, Tile.TILE_DIA);
 				}else if(itens[selected] == "neve") {
 					World.tiles[tilex + tiley * World.WIDTH] = new WallTile(tilex*16, tiley*16, Tile.TILE_NEVE);
 				}else if(itens[selected] == "areia") {
@@ -60,7 +60,7 @@ public class Inventory {
 				
 				// Verficacao para nao colocar em cima do player
 				if(World.isFree(Game.player.getX(), Game.player.getY()) ==  false) {
-					World.tiles[tilex + tiley * World.WIDTH] = new FloorTile(tilex*16, tiley*16, Tile.TILE_AR);
+					World.tiles[tilex + tiley * World.WIDTH] = new FloorTile(tilex*16, tiley*16, Tile.TILE_DIA);
 				}
 			}
 		}
@@ -80,7 +80,7 @@ public class Inventory {
 			}else if (itens[i] == "terra"){
 				g.drawImage(Tile.TILE_TERRA,inicialPosition + (i * inventoryBoxSize) + 7, Game.HEIGHT * Game.SCALE - inventoryBoxSize + 7, 32, 32, null);
 			}else if (itens[i] == "ar"){
-				g.drawImage(Tile.TILE_AR,inicialPosition + (i * inventoryBoxSize) + 7, Game.HEIGHT * Game.SCALE - inventoryBoxSize + 7, 32, 32, null);
+				g.drawImage(Tile.TILE_DIA,inicialPosition + (i * inventoryBoxSize) + 7, Game.HEIGHT * Game.SCALE - inventoryBoxSize + 7, 32, 32, null);
 			}else if (itens[i] == "neve"){
 				g.drawImage(Tile.TILE_NEVE,inicialPosition + (i * inventoryBoxSize) + 7, Game.HEIGHT * Game.SCALE - inventoryBoxSize + 7, 32, 32, null);
 			}else if (itens[i] == "areia"){

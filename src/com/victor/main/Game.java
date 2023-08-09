@@ -76,7 +76,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		enemies1 = new ArrayList<Enemy1>();
 		
 		//INICIALIZANDO OBJETOS
-		player = new Player(16, 16, 16, 16, 4, Entity.PLAYER_SPRITE_RIGHT[0]);
+		player = new Player(16, 16, 16, 16, 1, Entity.PLAYER_SPRITE_RIGHT[0]);
 		world = new World();
 		ui = new UI();
 		inventory = new Inventory();

@@ -6,13 +6,14 @@ import java.awt.Graphics;
 
 import com.victor.entities.Player;
 import com.victor.main.Game;
+import com.victor.world.World;
 
 
 public class UI {
 	
-	public int seconds = 0;
-	public int minutes = 0;
-	public int frames = 0;
+	public static int seconds = 0;
+	public static int minutes = 0;
+	public static int frames = 0;
 	
 	public void tick() {
 		
@@ -26,6 +27,15 @@ public class UI {
 			 if(seconds == 60) {
 				 seconds = 0;
 				 minutes++;
+				 
+				 
+				// LOGICA DE MUDANCA HORARIO
+				if(UI.minutes % 2 == 0) {	// a cada 2 min troca o ciclo
+					World.CICLO++;
+					if(World.CICLO > World.noite) {
+						World.CICLO = 0;
+					}
+				}
 			 }
 		 }
 	}

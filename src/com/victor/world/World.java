@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import com.victor.entities.Enemy1;
 import com.victor.entities.Entity;
 import com.victor.entities.Player;
+import com.victor.graficos.UI;
 import com.victor.main.Game;
 
 public class World {
@@ -15,6 +16,11 @@ public class World {
 	public static Tile[] tiles;
 	public static int WIDTH,HEIGHT;
 	public static final int TILE_SIZE = 16;
+	
+	// LOGICA DE MUDANCA DE CICLO TA NO UI
+	public static int dia = 0, noite = 1;
+	public static int CICLO = dia; 
+	
 	
 	
 	public World(){
@@ -25,7 +31,7 @@ public class World {
 		tiles = new Tile[WIDTH * HEIGHT];
 		
 		// VARIAVEIS
-		String [] tilesTypes = {"grama", "terra", "areia", "neve "};
+		String [] tilesTypes = {"grama", "terra", "areia", "neve ", ""};
 		int inicialHeight = Entity.rand.nextInt(12 - 8) + 8;
 		int divisao = WIDTH/tilesTypes.length;
 		
@@ -51,7 +57,7 @@ public class World {
 						}
 						
 					}else {
-						tiles[xx+yy*WIDTH] = new FloorTile(xx*16, yy*16, Tile.TILE_AR);
+						tiles[xx+yy*WIDTH] = new FloorTile(xx*16, yy*16, Tile.TILE_DIA);
 					}
 				}
 			}
@@ -78,6 +84,7 @@ public class World {
 				(tiles[x3 + (y3*World.WIDTH)] instanceof WallTile) ||
 				(tiles[x4 + (y4*World.WIDTH)] instanceof WallTile));
 	}
+	
 	
 	public static void restartGame(String level){
 		//new Game();
