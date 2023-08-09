@@ -18,7 +18,8 @@ public class Enemy1 extends Entity{
 	
 	private int frames = 0, maxFrames = 25, index = 0, maxIndex = 1;
 	
-	public int vida = 1;
+	public double life = 100;
+	public double maxLife = life;
 	public int dir = 1;
 
 	public BufferedImage[] ENEMY1;
@@ -78,6 +79,12 @@ public class Enemy1 extends Entity{
 			}
 		}
 		
+		// PERDE VIDA
+		if(life == 0) {
+			Game.entities.remove(this);
+			return;
+		}
+		
 		//LOGICA ANIMACAO
 		frames++;
 		if(frames == maxFrames) {
@@ -111,9 +118,18 @@ public class Enemy1 extends Entity{
 		
 		g.drawImage(ENEMY1[index],this.getX() - Camera.x, this.getY() - Camera.y, null);
 		
+		
 	//DEBUG  MASK
 	//g.setColor(Color.BLUE);
 	//g.fillRect(getX() - Camera.x, getY() - Camera.y, width, height);
 	super.render(g);
+	
+	
+	// BARRA DE VIDA
+	int curLife = (int)((life / maxLife ) * 20);
+	g.setColor(Color.red);
+	g.fillRect(this.getX() - Camera.x - 3, this.getY() - Camera.y, curLife, 1);
+	g.setColor(Color.green);
+	g.fillRect(this.getX() - Camera.x - 3, this.getY() - Camera.y, curLife, 1);
 	}
 }

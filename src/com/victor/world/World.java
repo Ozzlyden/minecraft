@@ -26,13 +26,13 @@ public class World {
 	public World(){
 		
 		// DIMENSOES MUNDO
-		WIDTH = 100;	
+		WIDTH = 1000;	
 		HEIGHT = 80;
 		tiles = new Tile[WIDTH * HEIGHT];
 		
 		// VARIAVEIS
 		String [] tilesTypes = {"grama", "terra", "areia", "neve ", ""};
-		int inicialHeight = Entity.rand.nextInt(12 - 8) + 8;
+		int inicialHeight = Entity.rand.nextInt(17 - 11) +11;
 		int divisao = WIDTH/tilesTypes.length;
 		
 		// DIVISOR MAP

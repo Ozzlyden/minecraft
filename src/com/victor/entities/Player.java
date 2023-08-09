@@ -27,21 +27,28 @@ public class Player extends Entity {
 	private double vspd = 0;		// Altura do pulo gravidade avancada
 	public int dir = 1;
 	
-	private BufferedImage[] PLAYER_RIGHT;
-	private BufferedImage[] PLAYER_LEFT;
+	public boolean attack = false;
+	public boolean isAttacking = false;
+	public int attackFrames = 0, maxFramesAttack = 10;
 	
+	public BufferedImage[] PLAYER_RIGHT;
+	public BufferedImage[] PLAYER_LEFT;
+	public BufferedImage[] ATTACK_FEEDBACK;	
 	
 	public Player(int x, int y, int width, int height,double speed, BufferedImage sprite) {
 		super(x, y, width, height,speed, sprite);
 	
 		PLAYER_RIGHT = new BufferedImage[2];
 		PLAYER_LEFT = new BufferedImage[2];
+		ATTACK_FEEDBACK = new BufferedImage[2];
 		
 		PLAYER_RIGHT[0] = Game.spritesheet.getSprite(48, 32, 16, 16);
 		PLAYER_RIGHT[1] = Game.spritesheet.getSprite(64, 32, 16, 16);
 		PLAYER_LEFT[0] = Game.spritesheet.getSprite(48, 48, 16, 16);
 		PLAYER_LEFT[1] = Game.spritesheet.getSprite(64, 48, 16, 16);
-
+		
+		ATTACK_FEEDBACK[0] = Game.spritesheet.getSprite(48, 64, 16, 16);  // RIGHT
+		ATTACK_FEEDBACK[1] = Game.spritesheet.getSprite(64, 64, 16, 16);  // LEFT
 	}
 	
 	public void tick() {
@@ -98,6 +105,21 @@ public class Player extends Entity {
 			}
 		}
 		
+		// SISTEMA DE ATAQUE
+		if(attack) {
+			if(isAttacking == false) {
+				attack = false;
+				isAttacking = true;
+			}
+		}
+		if(isAttacking) {
+			attackFrames++;
+			if(attackFrames == maxFramesAttack) {
+				attackFrames = 0;
+				isAttacking = false;
+			}
+		}
+		
 		// LOGICA ANIMACAO
 		if(moved == true) {
 			framesAnimation++;
@@ -110,25 +132,52 @@ public class Player extends Entity {
 			}	
 		}
 		
+		collisionEnemy();
 		
 		//SISTEMA DE CAMERA
 		Camera.x = Camera.clamp((int)x - Game.WIDTH / 2, 0, World.WIDTH * 16 - Game.WIDTH);
 		Camera.y = Camera.clamp((int)y - Game.HEIGHT / 2, 0, World.HEIGHT * 16 - Game.HEIGHT);
+	}
+	
+	// SISTEMA DE DANO
+	public void collisionEnemy() {
+		for(int i = 0; i < Game.entities.size(); i++) {
+			Entity e = Game.entities.get(i);
+			if(e instanceof Enemy1) {
+				if(Entity.rand.nextInt(100) < 30) {
+					if(Entity.isColliding(this, e)) {
+						life-=0.3;
+						if(isAttacking) {
+							((Enemy1) e).life-=25;
+						}
+					}
+				}
+			}
+		}
 	}
 		
 
 	
 	public void render(Graphics g) { 
 		
+		// MOVIMENTACAO
 		if(moved == false) {
 			sprite = PLAYER_RIGHT[0];
 		}
 			
-			if(dir == 1) {
-				sprite = PLAYER_RIGHT[curSprite];
-			}else if (dir == -1) {
-				sprite = PLAYER_LEFT[curSprite];
+		if(dir == 1) {
+			sprite = PLAYER_RIGHT[curSprite];
+			if(isAttacking) {
+				g.drawImage(ATTACK_FEEDBACK[0], this.getX() + 6 - Camera.x, this.getY() - Camera.y, null);
 			}
+		}else if (dir == -1) {
+			sprite = PLAYER_LEFT[curSprite];
+			if(isAttacking) {
+				g.drawImage(ATTACK_FEEDBACK[1], this.getX() - 6 - Camera.x, this.getY() - Camera.y, null);
+			}
+		}
+			
+			
 		super.render(g);
 	}
 }
