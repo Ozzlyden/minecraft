@@ -50,6 +50,8 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 	
 	public static Inventory inventory;
 	
+	public static EnemySpawn enemySpawn;
+	
 	public UI ui;			
 	
 	public Game() {
@@ -78,6 +80,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		world = new World();
 		ui = new UI();
 		inventory = new Inventory();
+		enemySpawn = new EnemySpawn();
 		
 		entities.add(player);
 	}
@@ -137,6 +140,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		
 		ui.tick();
 		inventory.tick();
+		enemySpawn.tick();
 	}
 	
 	
